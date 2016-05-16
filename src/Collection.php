@@ -16,8 +16,10 @@ use JsonSerializable;
 use IteratorAggregate;
 use InvalidArgumentException;
 use Doraemons\Tools\Traits\Macroable;
+use Doraemons\Tools\Contracts\Arrayable;
+USE Doraemons\Tools\Contracts\Jsonable;
 
-class Collection implements ArrayAccess, ArrayableInterface, Countable, IteratorAggregate, JsonableInterface, JsonSerializable
+class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate, Jsonable, JsonSerializable
 {
     use Macroable;
 
@@ -1024,7 +1026,7 @@ class Collection implements ArrayAccess, ArrayableInterface, Countable, Iterator
     public function toArray()
     {
         return array_map(function ($value) {
-            return $value instanceof ArrayableInterface ? $value->toArray() : $value;
+            return $value instanceof Arrayable ? $value->toArray() : $value;
         }, $this->items);
     }
 
@@ -1038,9 +1040,9 @@ class Collection implements ArrayAccess, ArrayableInterface, Countable, Iterator
         return array_map(function ($value) {
             if ($value instanceof JsonSerializable) {
                 return $value->jsonSerialize();
-            } elseif ($value instanceof JsonableInterface) {
+            } elseif ($value instanceof Jsonable) {
                 return json_decode($value->toJson(), true);
-            } elseif ($value instanceof ArrayableInterface) {
+            } elseif ($value instanceof Arrayable) {
                 return $value->toArray();
             } else {
                 return $value;
@@ -1161,9 +1163,9 @@ class Collection implements ArrayAccess, ArrayableInterface, Countable, Iterator
             return $items;
         } elseif ($items instanceof self) {
             return $items->all();
-        } elseif ($items instanceof ArrayableInterface) {
+        } elseif ($items instanceof Arrayable) {
             return $items->toArray();
-        } elseif ($items instanceof JsonableInterface) {
+        } elseif ($items instanceof Jsonable) {
             return json_decode($items->toJson(), true);
         } elseif ($items instanceof JsonSerializable) {
             return $items->jsonSerialize();

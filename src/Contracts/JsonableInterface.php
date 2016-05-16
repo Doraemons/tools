@@ -6,10 +6,10 @@
  * Time: 20:36
  */
 
-namespace Doraemons\Tools;
+namespace Doraemons\Tools\Contracts;
 
 
-interface JsonableInterface
+interface Jsonable
 {
     /**
      * Convert the object to its JSON representation.

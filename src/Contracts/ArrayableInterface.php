@@ -6,10 +6,10 @@
  * Time: 20:36
  */
 
-namespace Doraemons\Tools;
+namespace Doraemons\Tools\Contracts;
 
 
-interface ArrayableInterface
+interface Arrayable
 {
     /**
      * Get the instance as an array.
