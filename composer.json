@@ -26,11 +26,5 @@
       "src/helpers.php"
     ]
   },
-  "suggest": {},
-  "repositories": {
-    "packagist": {
-      "type": "composer",
-      "url": "https://packagist.phpcomposer.com"
-    }
-  }
+  "suggest": {}
 }
